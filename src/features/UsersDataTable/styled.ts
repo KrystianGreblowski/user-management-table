@@ -18,16 +18,16 @@ export const Container = styled.div`
 export const Title = styled.h1`
   font-size: 44px;
   font-weight: 700;
-  margin: 0 0 32px 0;
+  margin: 0 0 16px 0;
 
   @media (max-width: 767px) {
     font-size: 28px;
-    margin: 0 0 24px 0;
+    margin: 0 0 8px 0;
   }
 
   @media (max-width: 480px) {
     font-size: 24px;
-    margin: 0 0 16px 0;
+    margin: 0 0 4px 0;
   }
 `;
 
