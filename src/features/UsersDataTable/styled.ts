@@ -1,13 +1,37 @@
 import styled from "styled-components";
 
-export const TableContainer = styled.table`
-  margin: 64px auto;
+export const Container = styled.div`
+  max-width: 1368px;
+  display: grid;
+  grid-template-columns: 1fr;
   padding: 0 8px;
+  margin: 32px auto;
 
   @media (max-width: 767px) {
-    margin: 32px auto;
+    margin: 24px auto;
+  }
+
+  @media (max-width: 480px) {
+    margin: 16px auto;
   }
 `;
+export const Title = styled.h1`
+  font-size: 44px;
+  font-weight: 700;
+  margin: 0 0 32px 0;
+
+  @media (max-width: 767px) {
+    font-size: 28px;
+    margin: 0 0 24px 0;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 24px;
+    margin: 0 0 16px 0;
+  }
+`;
+
+export const TableContainer = styled.table``;
 
 export const TableHead = styled.thead``;
 
