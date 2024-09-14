@@ -1,4 +1,12 @@
 import { useUsersData } from "./useUsersData";
+import {
+  TableContainer,
+  TableBody,
+  TableHead,
+  TableHeader,
+  TableRow,
+  TableData,
+} from "./styled";
 
 const UsersDataTable = () => {
   const { usersData } = useUsersData();
@@ -6,27 +14,27 @@ const UsersDataTable = () => {
   console.log(usersData);
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Phone</th>
-        </tr>
-      </thead>
+    <TableContainer>
+      <TableHead>
+        <TableRow>
+          <TableHeader>Name</TableHeader>
+          <TableHeader>Username</TableHeader>
+          <TableHeader>Email</TableHeader>
+          <TableHeader>Phone</TableHeader>
+        </TableRow>
+      </TableHead>
 
-      <tbody>
+      <TableBody>
         {usersData.map((user) => (
-          <tr key={user.id}>
-            <td>{user.name}</td>
-            <td>{user.username}</td>
-            <td>{user.email}</td>
-            <td>{user.phone}</td>
-          </tr>
+          <TableRow key={user.id}>
+            <TableData>{user.name}</TableData>
+            <TableData>{user.username}</TableData>
+            <TableData>{user.email}</TableData>
+            <TableData>{user.phone}</TableData>
+          </TableRow>
         ))}
-      </tbody>
-    </table>
+      </TableBody>
+    </TableContainer>
   );
 };
 
