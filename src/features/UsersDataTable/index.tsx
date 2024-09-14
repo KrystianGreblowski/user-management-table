@@ -1,5 +1,8 @@
-import { useUsersData } from "./useUsersData";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import {
+  Container,
+  Title,
   TableContainer,
   TableBody,
   TableHead,
@@ -7,34 +10,54 @@ import {
   TableRow,
   TableData,
 } from "./styled";
+import {
+  initUsersDataFetching,
+  selectUsersData,
+  selectUsersDataStatus,
+} from "./usersDataSlice";
+import Loader from "../../common/Loader";
+import Error from "../../common/Error";
 
 const UsersDataTable = () => {
-  const { usersData } = useUsersData();
+  const dispatch = useDispatch();
 
-  console.log(usersData);
+  useEffect(() => {
+    dispatch(initUsersDataFetching());
+  }, [dispatch]);
+
+  const usersData = useSelector(selectUsersData);
+  const usersDataStatus = useSelector(selectUsersDataStatus);
+
+  if (usersDataStatus === "loading") return <Loader />;
+
+  if (usersDataStatus === "error") return <Error />;
 
   return (
-    <TableContainer>
-      <TableHead>
-        <TableRow>
-          <TableHeader>Name</TableHeader>
-          <TableHeader>Username</TableHeader>
-          <TableHeader>Email</TableHeader>
-          <TableHeader>Phone</TableHeader>
-        </TableRow>
-      </TableHead>
+    <Container>
+      <Title>Users Information</Title>
 
-      <TableBody>
-        {usersData.map((user) => (
-          <TableRow key={user.id}>
-            <TableData>{user.name}</TableData>
-            <TableData>{user.username}</TableData>
-            <TableData>{user.email}</TableData>
-            <TableData>{user.phone}</TableData>
+      <TableContainer>
+        <TableHead>
+          <TableRow>
+            <TableHeader>Name</TableHeader>
+            <TableHeader>Username</TableHeader>
+            <TableHeader>Email</TableHeader>
+            <TableHeader>Phone</TableHeader>
           </TableRow>
-        ))}
-      </TableBody>
-    </TableContainer>
+        </TableHead>
+
+        <TableBody>
+          {usersData.map((user) => (
+            <TableRow key={user.id}>
+              <TableData>{user.name}</TableData>
+              <TableData>{user.username}</TableData>
+              <TableData>{user.email}</TableData>
+              <TableData>{user.phone}</TableData>
+            </TableRow>
+          ))}
+        </TableBody>
+      </TableContainer>
+    </Container>
   );
 };
 
