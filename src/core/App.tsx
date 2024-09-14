@@ -1,7 +1,7 @@
-import React from "react";
+import UsersDataTable from "../features/UsersDataTable";
 
 const App = () => {
-  return <>Hello</>;
+  return <UsersDataTable />;
 };
 
 export default App;
