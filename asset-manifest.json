@@ -1,10 +1,12 @@
 {
   "files": {
-    "main.js": "/user-management-table/static/js/main.f66a3912.js",
+    "main.js": "/user-management-table/static/js/main.e1721e21.js",
+    "static/media/error.svg": "/user-management-table/static/media/error.e3d5a53b0e00a028db57415879e31c5c.svg",
     "index.html": "/user-management-table/index.html",
-    "main.f66a3912.js.map": "/user-management-table/static/js/main.f66a3912.js.map"
+    "static/media/spinner.svg": "/user-management-table/static/media/spinner.e6c76b23dbaaabd9e9f870894e4cd3ef.svg",
+    "main.e1721e21.js.map": "/user-management-table/static/js/main.e1721e21.js.map"
   },
   "entrypoints": [
-    "static/js/main.f66a3912.js"
+    "static/js/main.e1721e21.js"
   ]
 }
