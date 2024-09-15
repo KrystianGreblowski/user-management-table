@@ -1,4 +1,11 @@
-import { call, delay, put, takeEvery } from "redux-saga/effects";
+import {
+  call,
+  delay,
+  put,
+  takeEvery,
+  CallEffect,
+  PutEffect,
+} from "redux-saga/effects";
 import { getUsersData } from "./getUsersData";
 import {
   fetchUsersData,
@@ -7,10 +14,13 @@ import {
 } from "./usersDataSlice";
 import { User } from "./getUsersData";
 
-function* fetchUsersDataHandler(): Generator {
+function* fetchUsersDataHandler(): Generator<
+  CallEffect | PutEffect | ReturnType<typeof delay>,
+  void,
+  User[]
+> {
   try {
-    // @ts-ignore
-    const usersData: User[] = yield call(getUsersData);
+    const usersData = yield call(getUsersData);
     yield put(fetchUsersData(usersData));
     yield delay(700);
     yield put(fetchUsersDataSuccess());
