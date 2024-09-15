@@ -57,6 +57,36 @@ export const TableHeader = styled.th`
   }
 `;
 
+export const SearchContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 32px;
+`;
+
+export const SearchInput = styled.input`
+  border: none;
+  outline: none;
+  max-width: 300px;
+  background-color: white;
+  color: black;
+  padding: 12px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 400;
+  box-shadow: 1px 1px 1px #3a3a3a4d;
+  border-radius: 3px;
+
+  @media (max-width: 767px) {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 10px;
+    padding: 4px;
+  }
+`;
+
 export const TableBody = styled.tbody``;
 
 export const TableData = styled.td`

@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   Container,
   Title,
+  SearchContainer,
+  SearchInput,
   TableContainer,
   TableBody,
   TableHead,
@@ -12,11 +14,15 @@ import {
 } from "./styled";
 import {
   initUsersDataFetching,
-  selectUsersData,
+  selectUsersDataByQuery,
   selectUsersDataStatus,
+  UsersDataState,
 } from "./usersDataSlice";
 import Loader from "../../common/Loader";
 import Error from "../../common/Error";
+import searchQueryParamName from "./searchQueryParamName";
+import { useQueryParameter } from "./useQueryParameter";
+import { useReplaceQueryParameter } from "./useReplaceQueryParameter";
 
 const UsersDataTable = () => {
   const dispatch = useDispatch();
@@ -25,8 +31,21 @@ const UsersDataTable = () => {
     dispatch(initUsersDataFetching());
   }, [dispatch]);
 
-  const usersData = useSelector(selectUsersData);
   const usersDataStatus = useSelector(selectUsersDataStatus);
+
+  const query = useQueryParameter(searchQueryParamName);
+  const replaceQueryParameter = useReplaceQueryParameter();
+
+  const onInputChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    replaceQueryParameter({
+      key: searchQueryParamName,
+      value: target.value.trim() !== "" ? target.value : undefined,
+    });
+  };
+
+  const usersData = useSelector((state: { usersData: UsersDataState }) =>
+    selectUsersDataByQuery(state, query),
+  );
 
   if (usersDataStatus === "loading") return <Loader />;
 
@@ -35,6 +54,14 @@ const UsersDataTable = () => {
   return (
     <Container>
       <Title>Users Information</Title>
+
+      <SearchContainer>
+        <SearchInput
+          placeholder="Search Name"
+          value={query || ""}
+          onChange={onInputChange}
+        />
+      </SearchContainer>
 
       <TableContainer>
         <TableHead>
