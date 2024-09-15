@@ -1,7 +1,7 @@
-import UsersDataTable from "../features/UsersDataTable";
+import { Outlet } from "react-router-dom";
 
 const App = () => {
-  return <UsersDataTable />;
+  return <Outlet />;
 };
 
 export default App;
