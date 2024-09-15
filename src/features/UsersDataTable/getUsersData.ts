@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 export interface User {
   id: number;
@@ -11,11 +11,7 @@ export interface User {
 export const getUsersData = async (): Promise<User[]> => {
   const apiUrl = `https://jsonplaceholder.typicode.com/users`;
 
-  try {
-    const response = await axios.get<User[]>(apiUrl);
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
+  const response: AxiosResponse<User[]> = await axios.get(apiUrl);
+
+  return response.data;
 };
