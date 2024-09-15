@@ -1,4 +1,8 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+interface UsersDataTableProps {
+  $noResults: boolean;
+}
 
 export const Container = styled.div`
   display: grid;
@@ -35,7 +39,7 @@ export const TableContainer = styled.table``;
 
 export const TableHead = styled.thead``;
 
-export const TableRow = styled.tr`
+export const TableRow = styled.tr<UsersDataTableProps>`
   display: grid;
   grid-template-columns: repeat(4, 240px);
   grid-gap: 3px;
@@ -52,6 +56,24 @@ export const TableRow = styled.tr`
     grid-template-columns: repeat(4, 80px);
     grid-gap: 2px;
   }
+
+  ${({ $noResults }) =>
+    $noResults &&
+    css`
+      grid-template-columns: 1fr;
+
+      @media (max-width: 1024px) {
+        grid-template-columns: 1fr;
+      }
+
+      @media (max-width: 767px) {
+        grid-template-columns: 1fr;
+      }
+
+      @media (max-width: 480px) {
+        grid-template-columns: 1fr;
+      }
+    `}
 `;
 
 export const TableHeader = styled.th`

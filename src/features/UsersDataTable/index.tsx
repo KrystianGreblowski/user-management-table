@@ -90,7 +90,7 @@ const UsersDataTable = () => {
 
       <TableContainer>
         <TableHead>
-          <TableRow>
+          <TableRow $noResults={false}>
             <TableHeader>Name</TableHeader>
             <TableHeader>Username</TableHeader>
             <TableHeader>Email</TableHeader>
@@ -98,16 +98,24 @@ const UsersDataTable = () => {
           </TableRow>
         </TableHead>
 
-        <TableBody>
-          {usersData.map((user) => (
-            <TableRow key={user.id}>
-              <TableData>{user.name}</TableData>
-              <TableData>{user.username}</TableData>
-              <TableData>{user.email}</TableData>
-              <TableData>{user.phone}</TableData>
+        {usersData.length > 0 ? (
+          <TableBody>
+            {usersData.map((user) => (
+              <TableRow key={user.id} $noResults={false}>
+                <TableData>{user.name}</TableData>
+                <TableData>{user.username}</TableData>
+                <TableData>{user.email}</TableData>
+                <TableData>{user.phone}</TableData>
+              </TableRow>
+            ))}
+          </TableBody>
+        ) : (
+          <TableBody>
+            <TableRow $noResults={true}>
+              <TableData>No results</TableData>
             </TableRow>
-          ))}
-        </TableBody>
+          </TableBody>
+        )}
       </TableContainer>
     </Container>
   );
