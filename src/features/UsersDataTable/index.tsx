@@ -63,7 +63,7 @@ const UsersDataTable = () => {
 
   return (
     <Container>
-      <Title>Users Information</Title>
+      <Title>User Management</Title>
 
       <SearchContainer>
         <SearchInput
