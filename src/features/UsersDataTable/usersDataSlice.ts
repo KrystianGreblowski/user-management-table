@@ -45,17 +45,40 @@ export const selectUsersDataStatus = (state: { usersData: UsersDataState }) =>
 
 export const selectUsersDataByQuery = (
   state: { usersData: UsersDataState },
-  query: string | null,
+  queries: {
+    nameQuery: string | null;
+    usernameQuery: string | null;
+    emailQuery: string | null;
+    phoneQuery: string | null;
+  },
 ) => {
   const usersData = selectUsersData(state);
 
-  if (!query || query.trim() === "") {
-    return usersData;
-  }
+  return usersData.filter((user) => {
+    const name =
+      !queries.nameQuery ||
+      user.name.toUpperCase().includes(queries.nameQuery.trim().toUpperCase());
 
-  return usersData.filter(({ name }) =>
-    name.toUpperCase().includes(query.trim().toUpperCase()),
-  );
+    const username =
+      !queries.usernameQuery ||
+      user.username
+        .toUpperCase()
+        .includes(queries.usernameQuery.trim().toUpperCase());
+
+    const email =
+      !queries.emailQuery ||
+      user.email
+        .toUpperCase()
+        .includes(queries.emailQuery.trim().toUpperCase());
+
+    const phone =
+      !queries.phoneQuery ||
+      user.phone
+        .toUpperCase()
+        .includes(queries.phoneQuery.trim().toUpperCase());
+
+    return name && username && email && phone;
+  });
 };
 
 export default usersDataSlice.reducer;

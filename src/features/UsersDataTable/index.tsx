@@ -20,7 +20,6 @@ import {
 } from "./usersDataSlice";
 import Loader from "../../common/Loader";
 import Error from "../../common/Error";
-import searchQueryParamName from "./searchQueryParamName";
 import { useQueryParameter } from "./useQueryParameter";
 import { useReplaceQueryParameter } from "./useReplaceQueryParameter";
 
@@ -33,18 +32,29 @@ const UsersDataTable = () => {
 
   const usersDataStatus = useSelector(selectUsersDataStatus);
 
-  const query = useQueryParameter(searchQueryParamName);
+  const nameQuery = useQueryParameter("search-by-name");
+  const usernameQuery = useQueryParameter("search-by-username");
+  const emailQuery = useQueryParameter("search-by-email");
+  const phoneQuery = useQueryParameter("search-by-phone");
+
   const replaceQueryParameter = useReplaceQueryParameter();
 
-  const onInputChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    replaceQueryParameter({
-      key: searchQueryParamName,
-      value: target.value.trim() !== "" ? target.value : undefined,
-    });
-  };
+  const onInputChange =
+    (key: string) =>
+    ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+      replaceQueryParameter({
+        key,
+        value: target.value.trim() !== "" ? target.value : undefined,
+      });
+    };
 
   const usersData = useSelector((state: { usersData: UsersDataState }) =>
-    selectUsersDataByQuery(state, query),
+    selectUsersDataByQuery(state, {
+      nameQuery,
+      usernameQuery,
+      emailQuery,
+      phoneQuery,
+    }),
   );
 
   if (usersDataStatus === "loading") return <Loader />;
@@ -57,9 +67,24 @@ const UsersDataTable = () => {
 
       <SearchContainer>
         <SearchInput
-          placeholder="Search Name"
-          value={query || ""}
-          onChange={onInputChange}
+          placeholder="Search by name"
+          value={nameQuery || ""}
+          onChange={onInputChange("search-by-name")}
+        />
+        <SearchInput
+          placeholder="Search by username"
+          value={usernameQuery || ""}
+          onChange={onInputChange("search-by-username")}
+        />
+        <SearchInput
+          placeholder="Search by email"
+          value={emailQuery || ""}
+          onChange={onInputChange("search-by-email")}
+        />
+        <SearchInput
+          placeholder="Search by phone"
+          value={phoneQuery || ""}
+          onChange={onInputChange("search-by-phone")}
         />
       </SearchContainer>
 
