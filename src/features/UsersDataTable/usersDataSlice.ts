@@ -32,6 +32,11 @@ export const usersDataSlice = createSlice({
 export const { initUsersDataFetching, fetchUsersData, fetchUsersDataError } =
   usersDataSlice.actions;
 
+export type FetchUsersDataAction = PayloadAction<User[]>;
+export type FetchUsersDataErrorAction = {
+  type: typeof fetchUsersDataError.type;
+};
+
 export const selectUsersData = (state: { usersData: UsersDataState }) =>
   state.usersData.data;
 export const selectUsersDataStatus = (state: { usersData: UsersDataState }) =>
