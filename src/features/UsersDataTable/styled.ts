@@ -19,6 +19,7 @@ export const Container = styled.div`
     margin: 8px auto;
   }
 `;
+
 export const Title = styled.h1`
   font-size: 44px;
   font-weight: 700;
