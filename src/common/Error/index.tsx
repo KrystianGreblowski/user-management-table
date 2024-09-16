@@ -5,7 +5,7 @@ const Error = () => {
     <Wrapper>
       <ErrorImage />
       <MainInfo>Ooops! Something went wrong...</MainInfo>
-      <ExtraInfo>Please check your network connection and try again</ExtraInfo>
+      <ExtraInfo>Please check your network connection and try again.</ExtraInfo>
     </Wrapper>
   );
 };
