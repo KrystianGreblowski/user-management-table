@@ -21,8 +21,6 @@ export const usersDataSlice = createSlice({
 
     fetchUsersData: (state, { payload: usersData }: PayloadAction<User[]>) => {
       state.data = usersData;
-    },
-    fetchUsersDataSuccess: (state) => {
       state.status = "success";
     },
     fetchUsersDataError: (state) => {
@@ -31,12 +29,8 @@ export const usersDataSlice = createSlice({
   },
 });
 
-export const {
-  initUsersDataFetching,
-  fetchUsersData,
-  fetchUsersDataSuccess,
-  fetchUsersDataError,
-} = usersDataSlice.actions;
+export const { initUsersDataFetching, fetchUsersData, fetchUsersDataError } =
+  usersDataSlice.actions;
 
 export const selectUsersData = (state: { usersData: UsersDataState }) =>
   state.usersData.data;
@@ -54,28 +48,17 @@ export const selectUsersDataByQuery = (
 ) => {
   const usersData = selectUsersData(state);
 
+  const nameQuery = queries.nameQuery?.trim().toUpperCase() || null;
+  const usernameQuery = queries.usernameQuery?.trim().toUpperCase() || null;
+  const emailQuery = queries.emailQuery?.trim().toUpperCase() || null;
+  const phoneQuery = queries.phoneQuery?.trim().toUpperCase() || null;
+
   return usersData.filter((user) => {
-    const name =
-      !queries.nameQuery ||
-      user.name.toUpperCase().includes(queries.nameQuery.trim().toUpperCase());
-
+    const name = !nameQuery || user.name.toUpperCase().includes(nameQuery);
     const username =
-      !queries.usernameQuery ||
-      user.username
-        .toUpperCase()
-        .includes(queries.usernameQuery.trim().toUpperCase());
-
-    const email =
-      !queries.emailQuery ||
-      user.email
-        .toUpperCase()
-        .includes(queries.emailQuery.trim().toUpperCase());
-
-    const phone =
-      !queries.phoneQuery ||
-      user.phone
-        .toUpperCase()
-        .includes(queries.phoneQuery.trim().toUpperCase());
+      !usernameQuery || user.username.toUpperCase().includes(usernameQuery);
+    const email = !emailQuery || user.email.toUpperCase().includes(emailQuery);
+    const phone = !phoneQuery || user.phone.toUpperCase().includes(phoneQuery);
 
     return name && username && email && phone;
   });
