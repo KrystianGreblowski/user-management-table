@@ -1,6 +1,6 @@
 # User Management
 
-An application that displays data downloaded from the mock API. The application allows you to filter the data by name, username, email or phone number.
+This is an application that displays data downloaded from the mock API. The application allows you to filter the data by name, username, email or phone number.
 
 The data is fetched from https://jsonplaceholder.typicode.com
 
