@@ -7,11 +7,7 @@ import {
   PutEffect,
 } from "redux-saga/effects";
 import { getUsersData } from "./getUsersData";
-import {
-  fetchUsersData,
-  fetchUsersDataError,
-  fetchUsersDataSuccess,
-} from "./usersDataSlice";
+import { fetchUsersData, fetchUsersDataError } from "./usersDataSlice";
 import { User } from "./getUsersData";
 
 function* fetchUsersDataHandler(): Generator<
@@ -21,9 +17,8 @@ function* fetchUsersDataHandler(): Generator<
 > {
   try {
     const usersData = yield call(getUsersData);
-    yield put(fetchUsersData(usersData));
     yield delay(700);
-    yield put(fetchUsersDataSuccess());
+    yield put(fetchUsersData(usersData));
   } catch (error) {
     yield put(fetchUsersDataError());
   }
