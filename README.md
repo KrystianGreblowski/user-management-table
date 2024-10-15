@@ -4,6 +4,9 @@ This is an application that displays data downloaded from the mock API. The appl
 
 The data is fetched from https://jsonplaceholder.typicode.com
 
+## Preview
+![User Management Image](https://i.postimg.cc/wMthcf2D/user-management.png)
+
 ## Demo
 [Click here](https://krystiangreblowski.github.io/user-management-table/)
 
